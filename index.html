@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Purifycss by LadiesChris</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Purifycss</h1>
+      <h2 class="project-tagline">Remove unused CSS. Also works with javascript styling.</h2>
+      <a href="https://github.com/LadiesChris/purifycss" class="btn">View on GitHub</a>
+      <a href="https://github.com/LadiesChris/purifycss/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/LadiesChris/purifycss/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="purifycss" class="anchor" href="#purifycss" aria-hidden="true"><span class="octicon octicon-link"></span></a>PurifyCSS</h1>
+
+<ul>
+<li>Detects which CSS classes your app is using and creates a file without the unused CSS.</li>
+</ul>
+
+<p>Able to also detect <strong>dynamically-loaded CSS classes</strong> in your javascript.</p>
+
+<p>PurifyCSS has been designed from the beginning with <strong>single-page apps</strong> in mind.</p>
+
+<p><em>This is in addition to working with static page apps.</em></p>
+
+<h1>
+<a id="potential-reduction" class="anchor" href="#potential-reduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Potential reduction</h1>
+
+<ul>
+<li>Bootstrap file: ~140k characters.</li>
+<li>Average Bootstrap usage: ~40% (at most)</li>
+<li>Minified Bootstrap: ~117k characters.</li>
+<li>Purified + Minified Bootstrap: <strong>~27k characters</strong>
+</li>
+</ul>
+
+<h1>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h1>
+
+<pre><code>npm install purify-css
+</code></pre>
+
+<h1>
+<a id="able-to-detect" class="anchor" href="#able-to-detect" aria-hidden="true"><span class="octicon octicon-link"></span></a>Able to detect</h1>
+
+<ul>
+<li>Anytime your class name is intact in your code.</li>
+</ul>
+
+<h5>
+<a id="example-for-the-class-button-active" class="anchor" href="#example-for-the-class-button-active" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example for the class <code>button-active</code>
+</h5>
+
+<div class="highlight highlight-html"><pre>  <span class="pl-c">&lt;!-- html --&gt;</span>
+  <span class="pl-c">&lt;!-- class directly on element --&gt;</span>
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>button-active<span class="pl-pds">"</span></span>&gt;click&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<div class="highlight highlight-javascript"><pre>  <span class="pl-c">// javascript</span>
+  <span class="pl-c">// this example is jquery, but anytime your class name </span>
+  <span class="pl-c">// is together in your javascript, it will work</span>
+  $(button).addClass(<span class="pl-s"><span class="pl-pds">'</span>button-active<span class="pl-pds">'</span></span>);</pre></div>
+
+<ul>
+<li>Dynamically created classes</li>
+</ul>
+
+<h5>
+<a id="example-for-the-class-button-active-1" class="anchor" href="#example-for-the-class-button-active-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example for the class <code>button-active</code>
+</h5>
+
+<div class="highlight highlight-javascript"><pre>  <span class="pl-c">// can detect even if class is split</span>
+  <span class="pl-k">var</span> half <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>button-<span class="pl-pds">'</span></span>;
+  $(button).addClass(half <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>active<span class="pl-pds">'</span></span>);
+
+  <span class="pl-c">// can detect even if class is joined</span>
+  <span class="pl-k">var</span> dynamicClass <span class="pl-k">=</span> [<span class="pl-s"><span class="pl-pds">'</span>button<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>active<span class="pl-pds">'</span></span>].<span class="pl-c1">join</span>(<span class="pl-s"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>);
+  $(button).addClass(dynamicClass);</pre></div>
+
+<ul>
+<li>
+<strong>All</strong> javascript frameworks</li>
+</ul>
+
+<h5>
+<a id="example-for-the-class-angular-button" class="anchor" href="#example-for-the-class-angular-button" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example for the class <code>angular-button</code>
+</h5>
+
+<div class="highlight highlight-javascript"><pre>  <span class="pl-c">&lt;!--</span> angular template <span class="pl-c">--&gt;</span>
+  <span class="pl-k">&lt;</span>div ng<span class="pl-k">-</span><span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>'angular' + '-button'<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span>/div<span class="pl-k">&gt;</span></pre></div>
+
+<h5>
+<a id="example-for-the-class-commentbox" class="anchor" href="#example-for-the-class-commentbox" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example for the class <code>commentBox</code>
+</h5>
+
+<div class="highlight highlight-javascript"><pre>  <span class="pl-c">// react component</span>
+  <span class="pl-k">var</span> CommentBox <span class="pl-k">=</span> React.createClass({
+    <span class="pl-en">render</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+      <span class="pl-k">return</span> (
+        <span class="pl-k">&lt;</span>div className<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>commentBox<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span>
+          Hello, world<span class="pl-k">!</span> I am a CommentBox.
+        <span class="pl-k">&lt;</span>/div<span class="pl-k">&gt;</span>
+      );
+    }
+  });
+  React.render(
+    <span class="pl-k">&lt;</span>CommentBox /<span class="pl-k">&gt;</span>,
+    <span class="pl-c1">document</span>.<span class="pl-c1">getElementById</span>(<span class="pl-s"><span class="pl-pds">'</span>content<span class="pl-pds">'</span></span>)
+  );</pre></div>
+
+<h3>
+<a id="purifycss-works-with-all-javascript-frameworks" class="anchor" href="#purifycss-works-with-all-javascript-frameworks" aria-hidden="true"><span class="octicon octicon-link"></span></a>PurifyCSS works with all Javascript frameworks.</h3>
+
+<h1>
+<a id="api" class="anchor" href="#api" aria-hidden="true"><span class="octicon octicon-link"></span></a>API</h1>
+
+<div class="highlight highlight-javascript"><pre><span class="pl-k">var</span> purify <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>purify-css<span class="pl-pds">'</span></span>);
+
+purify(content, css, options, callback);</pre></div>
+
+<h2>
+<a id="content" class="anchor" href="#content" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>content</code>
+</h2>
+
+<h5>
+<a id="type-array-or-string" class="anchor" href="#type-array-or-string" aria-hidden="true"><span class="octicon octicon-link"></span></a>Type: <code>Array</code> or <code>String</code>
+</h5>
+
+<p><strong><code>Array</code></strong> of filepaths to the files you want to search through for used classes (HTML, Javascripts, Templates, anything that relates to CSS classes)</p>
+
+<p><strong><code>String</code></strong> of content you want us to look for used classes.</p>
+
+<h2>
+<a id="css" class="anchor" href="#css" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>css</code>
+</h2>
+
+<h5>
+<a id="type-array-or-string-1" class="anchor" href="#type-array-or-string-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Type: <code>Array</code> or <code>String</code>
+</h5>
+
+<p><strong><code>Array</code></strong> of filepaths to the css files you want us to filter.</p>
+
+<p><strong><code>String</code></strong> of css you want us to filter.</p>
+
+<h2>
+<a id="options-optional" class="anchor" href="#options-optional" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>options (optional)</code>
+</h2>
+
+<h5>
+<a id="type-object" class="anchor" href="#type-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Type: <code>Object</code>
+</h5>
+
+<h5>
+<a id="properties-of-options-object" class="anchor" href="#properties-of-options-object" aria-hidden="true"><span class="octicon octicon-link"></span></a>Properties of options object:</h5>
+
+<ul>
+<li><p><strong><code>minify:</code></strong> Set to <code>true</code> to minify. Default: <code>false</code></p></li>
+<li><p><strong><code>output:</code></strong> Filepath to write purified css to. Returns raw string if <code>false</code>. Default: <code>false</code></p></li>
+<li><p><strong><code>info:</code></strong> Logs info on how much css was removed if <code>true</code>. Default: <code>false</code></p></li>
+</ul>
+
+<h2>
+<a id="callback-optional" class="anchor" href="#callback-optional" aria-hidden="true"><span class="octicon octicon-link"></span></a><code>callback (optional)</code>
+</h2>
+
+<h5>
+<a id="type-function" class="anchor" href="#type-function" aria-hidden="true"><span class="octicon octicon-link"></span></a>Type: <code>Function</code>
+</h5>
+
+<h5>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h5>
+
+<div class="highlight highlight-javascript"><pre>purify(content, css, options, <span class="pl-k">function</span>(<span class="pl-smi">output</span>){
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(output, <span class="pl-s"><span class="pl-pds">'</span> is the result of purify<span class="pl-pds">'</span></span>);
+});</pre></div>
+
+<h5>
+<a id="example-without-options" class="anchor" href="#example-without-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example without options</h5>
+
+<div class="highlight highlight-javascript"><pre>purify(content, css, <span class="pl-k">function</span>(<span class="pl-smi">output</span>){
+  <span class="pl-en">console</span><span class="pl-c1">.log</span>(<span class="pl-s"><span class="pl-pds">'</span>callback without options<span class="pl-pds">'</span></span>);
+});</pre></div>
+
+<h2>
+<a id="command-line-tool" class="anchor" href="#command-line-tool" aria-hidden="true"><span class="octicon octicon-link"></span></a>Command Line Tool</h2>
+
+<pre><code>$ npm install -g purify-css
+</code></pre>
+
+<pre><code>$ purifycss
+usage: purifycss &lt;css&gt; &lt;content&gt; [option ...]
+
+options:
+ --min                Minify CSS
+ --out [filepath]     Filepath to write purified css to
+ --info               Logs info on how much css was removed
+
+ -h, --help           Prints help (this message) and exits
+</code></pre>
+
+<h1>
+<a id="at-build-time" class="anchor" href="#at-build-time" aria-hidden="true"><span class="octicon octicon-link"></span></a>At build time</h1>
+
+<p><a href="https://github.com/purifycss/grunt-purify-css">Grunt</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/LadiesChris/purifycss">Purifycss</a> is maintained by <a href="https://github.com/LadiesChris">LadiesChris</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
